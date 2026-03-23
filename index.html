@@ -1,0 +1,1411 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FamilyTree Photos - Сохраните историю вашей семьи</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --amber: #E8A84C;
+            --amber-light: #F5C57D;
+            --cream: #FFF8E7;
+            --green: #2D5A4A;
+            --green-dark: #1E3D32;
+            --text: #333333;
+            --text-light: #666666;
+            --white: #FFFFFF;
+            --gray-light: #F5F5F5;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--cream);
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--white);
+            padding: 1rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--green);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo::before {
+            content: "🌳";
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--amber);
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 70px;
+            padding: 4rem 5%;
+            background: linear-gradient(135deg, var(--cream) 0%, var(--amber-light) 100%);
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            color: var(--green-dark);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero-content .highlight {
+            color: var(--amber);
+        }
+
+        .hero-content p {
+            font-size: 1.25rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--green);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: var(--green-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(45, 90, 74, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--amber);
+            color: var(--white);
+        }
+
+        .btn-secondary:hover {
+            background: var(--amber-light);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(232, 168, 76, 0.3);
+        }
+
+        .hero-image {
+            position: relative;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .phone-mockup {
+            background: var(--white);
+            border-radius: 40px;
+            padding: 20px;
+            box-shadow: 0 25px 80px rgba(0,0,0,0.2);
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .phone-screen {
+            background: linear-gradient(to bottom, var(--cream), var(--amber-light));
+            border-radius: 30px;
+            padding: 20px;
+            aspect-ratio: 9/16;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tree-icon {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 5%;
+            background: var(--white);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--green-dark);
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-light);
+            font-size: 1.2rem;
+            margin-bottom: 4rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .feature-card {
+            padding: 2.5rem;
+            background: var(--cream);
+            border-radius: 20px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            color: var(--green-dark);
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        /* Screenshots Gallery Section */
+        .screenshots {
+            padding: 6rem 5%;
+            background: linear-gradient(to bottom, var(--white), var(--cream));
+        }
+
+        .screenshots-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .screenshot-card {
+            background: var(--white);
+            border-radius: 30px;
+            padding: 15px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.15);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .screenshot-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 70px rgba(0,0,0,0.2);
+        }
+
+        .screenshot-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--amber), var(--green));
+        }
+
+        .screenshot-phone {
+            background: linear-gradient(to bottom, var(--cream), var(--amber-light));
+            border-radius: 20px;
+            padding: 15px;
+            aspect-ratio: 9/16;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .screenshot-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(255,255,255,0.5);
+        }
+
+        .screenshot-title {
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: var(--green-dark);
+        }
+
+        .screenshot-time {
+            font-size: 0.75rem;
+            color: var(--text-light);
+        }
+
+        .screenshot-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+
+        .photo-item {
+            background: var(--white);
+            border-radius: 10px;
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .tree-visual {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            padding: 10px;
+        }
+
+        .tree-node {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+            position: relative;
+        }
+
+        .tree-line {
+            width: 2px;
+            height: 20px;
+            background: var(--green);
+        }
+
+        .tree-branch {
+            display: flex;
+            gap: 30px;
+        }
+
+        .video-player {
+            background: var(--green-dark);
+            border-radius: 10px;
+            aspect-ratio: 16/9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 3rem;
+            position: relative;
+        }
+
+        .play-button {
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--green);
+            font-size: 1.5rem;
+        }
+
+        .audio-wave {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            height: 60px;
+            padding: 10px;
+            background: var(--white);
+            border-radius: 10px;
+        }
+
+        .wave-bar {
+            width: 4px;
+            background: var(--amber);
+            border-radius: 2px;
+            animation: wave 1s ease-in-out infinite;
+        }
+
+        .wave-bar:nth-child(1) { height: 20px; animation-delay: 0s; }
+        .wave-bar:nth-child(2) { height: 40px; animation-delay: 0.1s; }
+        .wave-bar:nth-child(3) { height: 30px; animation-delay: 0.2s; }
+        .wave-bar:nth-child(4) { height: 50px; animation-delay: 0.3s; }
+        .wave-bar:nth-child(5) { height: 35px; animation-delay: 0.4s; }
+        .wave-bar:nth-child(6) { height: 45px; animation-delay: 0.5s; }
+        .wave-bar:nth-child(7) { height: 25px; animation-delay: 0.6s; }
+
+        @keyframes wave {
+            0%, 100% { transform: scaleY(0.5); }
+            50% { transform: scaleY(1); }
+        }
+
+        .profile-section {
+            background: var(--white);
+            border-radius: 10px;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .profile-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--amber);
+            margin: 0 auto 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .profile-name {
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: var(--green-dark);
+            margin-bottom: 5px;
+        }
+
+        .profile-info {
+            font-size: 0.7rem;
+            color: var(--text-light);
+        }
+
+        .screenshot-label {
+            text-align: center;
+            margin-top: 15px;
+            padding: 10px;
+            font-weight: 600;
+            color: var(--green-dark);
+            font-size: 0.95rem;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: 6rem 5%;
+            background: var(--white);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .pricing-card {
+            background: var(--cream);
+            border-radius: 25px;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .pricing-card.premium {
+            background: var(--green);
+            color: var(--white);
+            border: 2px solid var(--amber);
+            box-shadow: 0 20px 50px rgba(45, 90, 74, 0.3);
+        }
+
+        .pricing-card.premium .feature-list li {
+            color: var(--cream);
+        }
+
+        .pricing-card.premium h3, 
+        .pricing-card.premium .price {
+            color: var(--white);
+        }
+
+        .pricing-card.premium .price-sub {
+            color: var(--amber-light);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--amber);
+            color: var(--white);
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(232, 168, 76, 0.4);
+        }
+
+        .pricing-card h3 {
+            font-size: 1.8rem;
+            color: var(--green-dark);
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: var(--green-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .price-sub {
+            font-size: 1rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            display: block;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-bottom: 2.5rem;
+            text-align: left;
+        }
+
+        .feature-list li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        .check-icon {
+            color: var(--green);
+            font-weight: bold;
+        }
+
+        .pricing-card.premium .check-icon {
+            color: var(--amber);
+        }
+
+        .btn-pricing {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--green);
+            color: var(--green);
+        }
+
+        .btn-outline:hover {
+            background: var(--green);
+            color: var(--white);
+        }
+
+        .btn-pricing-premium {
+            background: var(--amber);
+            color: var(--white);
+            border: none;
+        }
+
+        .btn-pricing-premium:hover {
+            background: var(--amber-light);
+            transform: translateY(-2px);
+        }
+
+        /* How It Works */
+        .how-it-works {
+            padding: 6rem 5%;
+            background: linear-gradient(to bottom, var(--cream), var(--white));
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--amber);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 1.5rem;
+        }
+
+        .step h3 {
+            color: var(--green-dark);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .step p {
+            color: var(--text-light);
+        }
+
+        /* App Showcase */
+        .showcase {
+            padding: 6rem 5%;
+            background: var(--green);
+            color: var(--white);
+        }
+
+        .showcase .section-title {
+            color: var(--white);
+        }
+
+        .showcase .section-subtitle {
+            color: var(--cream);
+        }
+
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .showcase-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 2.5rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .showcase-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Download Section */
+        .download {
+            padding: 6rem 5%;
+            background: linear-gradient(135deg, var(--amber-light) 0%, var(--cream) 100%);
+            text-align: center;
+        }
+
+        .download-box {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 4rem;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+
+        .download h2 {
+            font-size: 2.5rem;
+            color: var(--green-dark);
+            margin-bottom: 1rem;
+        }
+
+        .download > .container > p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        .store-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .store-btn {
+            background: var(--text);
+            color: var(--white);
+            padding: 1rem 2.5rem;
+            border-radius: 12px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: all 0.3s;
+        }
+
+        .store-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .store-btn span {
+            display: block;
+            font-size: 0.75rem;
+            opacity: 0.8;
+        }
+
+        .store-btn strong {
+            display: block;
+            font-size: 1.2rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--green-dark);
+            color: var(--white);
+            padding: 3rem 5% 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: var(--amber);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: var(--cream);
+            text-decoration: none;
+            line-height: 2;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--amber);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.6);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--amber);
+            transform: translateY(-3px);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .hero-image {
+                order: -1;
+            }
+
+            .phone-mockup {
+                max-width: 280px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .cta-buttons {
+                justify-content: center;
+            }
+
+            .download-box {
+                padding: 2rem;
+            }
+
+            .screenshots-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 2rem;
+            }
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">FamilyTree Photos</div>
+            <ul class="nav-links">
+                <li><a href="#features">Возможности</a></li>
+                <li><a href="#screenshots">Экраны</a></li>
+                <li><a href="#pricing">Тарифы</a></li>
+                <li><a href="#how-it-works">Как это работает</a></li>
+                <li><a href="#download">Скачать</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>Сохраните историю <span class="highlight">вашей семьи</span></h1>
+                <p>Создавайте генеалогическое дерево, храните фотографии, видео и голосовые воспоминания в одном приложении. Соедините поколения с помощью современных технологий.</p>
+                <div class="cta-buttons">
+                    <a href="#download" class="btn btn-primary">📱 Скачать бесплатно</a>
+                    <a href="#features" class="btn btn-secondary">ℹ️ Узнать больше</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="phone-mockup">
+                    <div class="phone-screen">
+                        <div class="tree-icon">🌳</div>
+                        <h3 style="color: var(--green-dark); margin-bottom: 0.5rem;">FamilyTree</h3>
+                        <p style="color: var(--text-light); font-size: 0.9rem;">Photos & Genealogy</p>
+                        <div style="margin-top: 2rem; display: flex; gap: 0.5rem;">
+                            <div style="width: 40px; height: 40px; background: var(--amber); border-radius: 50%;"></div>
+                            <div style="width: 40px; height: 40px; background: var(--green); border-radius: 50%;"></div>
+                            <div style="width: 40px; height: 40px; background: var(--amber-light); border-radius: 50%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title">Возможности приложения</h2>
+            <p class="section-subtitle">Всё необходимое для сохранения семейной истории</p>
+            
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">📸</div>
+                    <h3>Семейный фотоальбом</h3>
+                    <p>Загружайте и организуйте фотографии по поколениям и событиям. Создавайте красивые альбомы с возможностью совместного доступа.</p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🎥</div>
+                    <h3>Видеоархив семьи</h3>
+                    <p>Записывайте и сохраняйте семейные видео: дни рождения, праздники, важные события. Привязывайте видеозаписи к конкретным людям и датам в генеалогическом дереве.</p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🎙️</div>
+                    <h3>Голосовые воспоминания</h3>
+                    <p>Записывайте истории из уст старших поколений, сохраняйте голоса близких. Создавайте аудиоархив семейных рассказов, песен и традиций для будущих поколений.</p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🌳</div>
+                    <h3>Генеалогическое древо</h3>
+                    <p>Стройте интерактивное дерево вашей семьи. Добавляйте родственников, указывайте связи и создавайте полную картину вашей родословной.</p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🔗</div>
+                    <h3>Мультимедийные профили</h3>
+                    <p>Создавайте богатые профили каждого члена семьи: фотографии, видео, голосовые записи, истории. Всё в одном месте для полной картины жизни человека.</p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">☁️</div>
+                    <h3>Облачное хранение</h3>
+                    <p>Все данные, включая видео и аудиофайлы, надёжно сохраняются в облаке. Доступ к семейному архиву с любого устройства в любое время.</p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">👨‍👩‍</div>
+                    <h3>Совместный доступ</h3>
+                    <p>Приглашайте родственников для совместного заполнения дерева и добавления мультимедиа. Работайте вместе над семейной историей.</p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Приватность</h3>
+                    <p>Ваши семейные данные под надёжной защитой. Настраивайте уровни доступа и делитесь информацией только с теми, кого выберете.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screenshots Gallery Section -->
+    <section class="screenshots" id="screenshots">
+        <div class="container">
+            <h2 class="section-title">Интерфейс приложения</h2>
+            <p class="section-subtitle">Посмотрите, как выглядит приложение и его основные экраны</p>
+            
+            <div class="screenshots-grid">
+                <!-- Screen 1: Photo Gallery -->
+                <div class="screenshot-card fade-in">
+                    <div class="screenshot-phone">
+                        <div class="screenshot-header">
+                            <span class="screenshot-title">📸 Фотоальбом</span>
+                            <span class="screenshot-time">12:30</span>
+                        </div>
+                        <div class="screenshot-content">
+                            <div class="photo-grid">
+                                <div class="photo-item">👨‍👩‍</div>
+                                <div class="photo-item">🎂</div>
+                                <div class="photo-item">🏖️</div>
+                                <div class="photo-item">🎄</div>
+                            </div>
+                            <div class="photo-grid">
+                                <div class="photo-item">👴</div>
+                                <div class="photo-item">🎓</div>
+                                <div class="photo-item">💒</div>
+                                <div class="photo-item">👶</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="screenshot-label">Галерея фотографий</div>
+                </div>
+
+                <!-- Screen 2: Family Tree -->
+                <div class="screenshot-card fade-in">
+                    <div class="screenshot-phone">
+                        <div class="screenshot-header">
+                            <span class="screenshot-title">🌳 Дерево</span>
+                            <span class="screenshot-time">12:30</span>
+                        </div>
+                        <div class="screenshot-content">
+                            <div class="tree-visual">
+                                <div class="tree-node">👴</div>
+                                <div class="tree-line"></div>
+                                <div class="tree-node">👨</div>
+                                <div class="tree-line"></div>
+                                <div class="tree-branch">
+                                    <div class="tree-node">👦</div>
+                                    <div class="tree-node">👧</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="screenshot-label">Генеалогическое дерево</div>
+                </div>
+
+                <!-- Screen 3: Video Player -->
+                <div class="screenshot-card fade-in">
+                    <div class="screenshot-phone">
+                        <div class="screenshot-header">
+                            <span class="screenshot-title">🎥 Видео</span>
+                            <span class="screenshot-time">12:30</span>
+                        </div>
+                        <div class="screenshot-content">
+                            <div class="video-player">
+                                <div class="play-button">▶</div>
+                            </div>
+                            <div style="background: var(--white); padding: 10px; border-radius: 10px; margin-top: 10px;">
+                                <div style="font-size: 0.8rem; font-weight: bold; color: var(--green-dark); margin-bottom: 5px;">День рождения бабушки</div>
+                                <div style="font-size: 0.7rem; color: var(--text-light);">📅 15 марта 2025 • 12:45</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="screenshot-label">Видеоплеер</div>
+                </div>
+
+                <!-- Screen 4: Audio Recording -->
+                <div class="screenshot-card fade-in">
+                    <div class="screenshot-phone">
+                        <div class="screenshot-header">
+                            <span class="screenshot-title">🎙️ Аудио</span>
+                            <span class="screenshot-time">12:30</span>
+                        </div>
+                        <div class="screenshot-content">
+                            <div style="text-align: center; padding: 10px;">
+                                <div style="font-size: 3rem; margin-bottom: 10px;">🎤</div>
+                                <div style="font-size: 0.9rem; font-weight: bold; color: var(--green-dark); margin-bottom: 15px;">Запись воспоминаний</div>
+                            </div>
+                            <div class="audio-wave">
+                                <div class="wave-bar"></div>
+                                <div class="wave-bar"></div>
+                                <div class="wave-bar"></div>
+                                <div class="wave-bar"></div>
+                                <div class="wave-bar"></div>
+                                <div class="wave-bar"></div>
+                                <div class="wave-bar"></div>
+                            </div>
+                            <div style="text-align: center; margin-top: 10px;">
+                                <div style="font-size: 1.5rem; color: var(--green);">⏱️ 03:24</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="screenshot-label">Запись аудио</div>
+                </div>
+
+                <!-- Screen 5: Profile -->
+                <div class="screenshot-card fade-in">
+                    <div class="screenshot-phone">
+                        <div class="screenshot-header">
+                            <span class="screenshot-title">👤 Профиль</span>
+                            <span class="screenshot-time">12:30</span>
+                        </div>
+                        <div class="screenshot-content">
+                            <div class="profile-section">
+                                <div class="profile-avatar">👵</div>
+                                <div class="profile-name">Анна Петровна</div>
+                                <div class="profile-info">Родилась: 12.05.1950</div>
+                                <div class="profile-info">Москва, Россия</div>
+                            </div>
+                            <div style="display: flex; gap: 8px; margin-top: 10px;">
+                                <div style="flex: 1; background: var(--amber); color: white; padding: 8px; border-radius: 8px; text-align: center; font-size: 0.75rem;">
+                                    📸 24 фото
+                                </div>
+                                <div style="flex: 1; background: var(--green); color: white; padding: 8px; border-radius: 8px; text-align: center; font-size: 0.75rem;">
+                                    🎥 5 видео
+                                </div>
+                            </div>
+                            <div style="background: var(--white); padding: 10px; border-radius: 10px; margin-top: 10px; font-size: 0.75rem; color: var(--text-light);">
+                                🎙️ 12 аудиозаписей
+                            </div>
+                        </div>
+                    </div>
+                    <div class="screenshot-label">Профиль члена семьи</div>
+                </div>
+
+                <!-- Screen 6: Main Menu -->
+                <div class="screenshot-card fade-in">
+                    <div class="screenshot-phone">
+                        <div class="screenshot-header">
+                            <span class="screenshot-title">🏠 Главное</span>
+                            <span class="screenshot-time">12:30</span>
+                        </div>
+                        <div class="screenshot-content">
+                            <div style="display: flex; flex-direction: column; gap: 10px;">
+                                <div style="background: var(--white); padding: 15px; border-radius: 12px; display: flex; align-items: center; gap: 12px; box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+                                    <div style="font-size: 2rem;">📸</div>
+                                    <div>
+                                        <div style="font-weight: bold; color: var(--green-dark); font-size: 0.9rem;">Фотографии</div>
+                                        <div style="font-size: 0.75rem; color: var(--text-light);">156 фото</div>
+                                    </div>
+                                </div>
+                                <div style="background: var(--white); padding: 15px; border-radius: 12px; display: flex; align-items: center; gap: 12px; box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+                                    <div style="font-size: 2rem;">🎥</div>
+                                    <div>
+                                        <div style="font-weight: bold; color: var(--green-dark); font-size: 0.9rem;">Видео</div>
+                                        <div style="font-size: 0.75rem; color: var(--text-light);">23 видео</div>
+                                    </div>
+                                </div>
+                                <div style="background: var(--white); padding: 15px; border-radius: 12px; display: flex; align-items: center; gap: 12px; box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+                                    <div style="font-size: 2rem;">🎙️</div>
+                                    <div>
+                                        <div style="font-weight: bold; color: var(--green-dark); font-size: 0.9rem;">Аудио</div>
+                                        <div style="font-size: 0.75rem; color: var(--text-light);">18 записей</div>
+                                    </div>
+                                </div>
+                                <div style="background: var(--white); padding: 15px; border-radius: 12px; display: flex; align-items: center; gap: 12px; box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+                                    <div style="font-size: 2rem;">🌳</div>
+                                    <div>
+                                        <div style="font-weight: bold; color: var(--green-dark); font-size: 0.9rem;">Дерево</div>
+                                        <div style="font-size: 0.75rem; color: var(--text-light);">42 человека</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="screenshot-label">Главное меню</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <h2 class="section-title">Выберите свой план</h2>
+            <p class="section-subtitle">Начните бесплатно или получите неограниченные возможности</p>
+            
+            <div class="pricing-grid">
+                <!-- Basic Plan -->
+                <div class="pricing-card fade-in">
+                    <h3>Базовый</h3>
+                    <div class="price">0 ₽</div>
+                    <span class="price-sub">Бесплатно навсегда</span>
+                    
+                    <ul class="feature-list">
+                        <li><span class="check-icon">✓</span> Локальное хранение на телефоне</li>
+                        <li><span class="check-icon">✓</span> Создание генеалогического дерева</li>
+                        <li><span class="check-icon">✓</span> Загрузка фото, видео и аудио</li>
+                        <li><span class="check-icon">✓</span> Ручной обмен файлами между устройствами</li>
+                        <li><span class="check-icon">✓</span> Базовая защита данных</li>
+                    </ul>
+                    
+                    <a href="#download" class="btn btn-pricing btn-outline">Начать бесплатно</a>
+                </div>
+
+                <!-- Premium Plan -->
+                <div class="pricing-card premium fade-in">
+                    <div class="popular-badge">🔥 Популярный выбор</div>
+                    <h3>Премиальный</h3>
+                    <div class="price">100 ₽</div>
+                    <span class="price-sub">в месяц</span>
+                    
+                    <ul class="feature-list">
+                        <li><span class="check-icon">✓</span> <strong>Облачное хранилище</strong> (без привязки к устройству)</li>
+                        <li><span class="check-icon">✓</span> <strong>Неограниченный объем</strong> файлов</li>
+                        <li><span class="check-icon">✓</span> Вечное хранение истории семьи</li>
+                        <li><span class="check-icon">✓</span> Автоматическая синхронизация</li>
+                        <li><span class="check-icon">✓</span> Доступ с любого устройства</li>
+                        <li><span class="check-icon">✓</span> Приоритетная поддержка</li>
+                    </ul>
+                    
+                    <a href="#download" class="btn btn-pricing btn-pricing-premium">Попробовать Premium</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <h2 class="section-title">Как это работает</h2>
+            <p class="section-subtitle">Начните создавать семейное дерево за 4 простых шага</p>
+            
+            <div class="steps">
+                <div class="step fade-in">
+                    <div class="step-number">1</div>
+                    <h3>Скачайте приложение</h3>
+                    <p>Доступно для iOS и Android. Быстрая регистрация за 30 секунд.</p>
+                </div>
+
+                <div class="step fade-in">
+                    <div class="step-number">2</div>
+                    <h3>Добавьте себя</h3>
+                    <p>Заполните основную информацию, загрузите фото и запишите голосовое приветствие.</p>
+                </div>
+
+                <div class="step fade-in">
+                    <div class="step-number">3</div>
+                    <h3>Пригласите родных</h3>
+                    <p>Добавьте родителей, детей и других родственников, загрузите их фото и видео.</p>
+                </div>
+
+                <div class="step fade-in">
+                    <div class="step-number">4</div>
+                    <h3>Запишите истории</h3>
+                    <p>Создавайте видеоинтервью, записывайте голосовые воспоминания и сохраняйте семейные традиции.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- App Showcase -->
+    <section class="showcase" id="showcase">
+        <div class="container">
+            <h2 class="section-title">Почему выбирают нас</h2>
+            <p class="section-subtitle">FamilyTree Photos — это больше, чем просто приложение</p>
+            
+            <div class="showcase-grid">
+                <div class="showcase-card fade-in">
+                    <h3>🎬 Видеointerview</h3>
+                    <p>Записывайте видеоинтервью с бабушками и дедушками, сохраняйте их истории, мудрость и воспоминания для будущих поколений в высоком качестве.</p>
+                </div>
+
+                <div class="showcase-card fade-in">
+                    <h3>🎵 Аудиоархив</h3>
+                    <p>Сохраняйте голоса любимых людей: колыбельные, семейные песни, рассказы, стихи. Создайте уникальную аудиоколлекцию вашей семьи.</p>
+                </div>
+
+                <div class="showcase-card fade-in">
+                    <h3>📹 Семейные события</h3>
+                    <p>Записывайте и храните видео с дней рождений, свадеб, праздников и других важных событий. Привязывайте их к конкретным датам и людям.</p>
+                </div>
+
+                <div class="showcase-card fade-in">
+                    <h3>🎨 Удобный интерфейс</h3>
+                    <p>Интуитивно понятный дизайн, который оценят пользователи любого возраста. От детей до бабушек и дедушек.</p>
+                </div>
+
+                <div class="showcase-card fade-in">
+                    <h3>📊 Экспорт данных</h3>
+                    <p>Скачивайте ваше генеалогическое дерево с мультимедиа в форматах PDF, создавайте красивые видеофильмы о семье и печатные альбомы.</p>
+                </div>
+
+                <div class="showcase-card fade-in">
+                    <h3>🌍 Поддержка языков</h3>
+                    <p>Приложение доступно на 15 языках, включая русский, английский, немецкий и другие.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section class="download" id="download">
+        <div class="container">
+            <div class="download-box fade-in">
+                <h2>Начните прямо сейчас</h2>
+                <p>Присоединяйтесь к тысячам семей, которые уже сохраняют свою историю с фото, видео и голосовыми воспоминаниями</p>
+                
+                <div class="store-buttons">
+                    <a href="#" class="store-btn">
+                        <span style="font-size: 2rem;">🍎</span>
+                        <div>
+                            <span>Загрузите в</span>
+                            <strong>App Store</strong>
+                        </div>
+                    </a>
+                    <a href="#" class="store-btn">
+                        <span style="font-size: 2rem;">🤖</span>
+                        <div>
+                            <span>Доступно в</span>
+                            <strong>Google Play</strong>
+                        </div>
+                    </a>
+                </div>
+
+                <p style="margin-top: 2rem; color: var(--text-light); font-size: 0.9rem;">
+                    ✅ Бесплатно • ✅ Без рекламы • ✅ Безопасно • ✅ Видео и аудио
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>FamilyTree Photos</h4>
+                <p style="color: var(--cream); line-height: 1.8;">Сохраняем историю вашей семьи для будущих поколений: фотографии, видео, голосовые воспоминания и генеалогическое дерево в одном приложении.</p>
+                <div class="social-links">
+                    <a href="#">📘</a>
+                    <a href="#">📸</a>
+                    <a href="#">🐦</a>
+                    <a href="#">▶️</a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h4>Продукт</h4>
+                <ul>
+                    <li><a href="#features">Возможности</a></li>
+                    <li><a href="#pricing">Тарифы</a></li>
+                    <li><a href="#">Premium</a></li>
+                    <li><a href="#">Для бизнеса</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Поддержка</h4>
+                <ul>
+                    <li><a href="#">Помощь</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Связаться с нами</a></li>
+                    <li><a href="#">Статус сервиса</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Компания</h4>
+                <ul>
+                    <li><a href="#">О нас</a></li>
+                    <li><a href="#">Блог</a></li>
+                    <li><a href="#">Карьера</a></li>
+                    <li><a href="#">Контакты</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 FamilyTree Photos. Все права защищены. | <a href="#" style="color: var(--amber);">Политика конфиденциальности</a> | <a href="#" style="color: var(--amber);">Условия использования</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Navbar background on scroll
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                nav.style.background = 'var(--white)';
+            }
+        });
+    </script>
+
+</body>
+</html>

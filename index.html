@@ -473,6 +473,75 @@
             font-size: 0.95rem;
         }
 
+        /* Happy Family Photos Gallery */
+        .family-gallery {
+            padding: 6rem 5%;
+            background: linear-gradient(to bottom, var(--cream), var(--white));
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            transition: all 0.3s;
+            aspect-ratio: 4/3;
+            background: linear-gradient(135deg, var(--amber-light), var(--green));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+        }
+
+        .gallery-photo {
+            font-size: 6rem;
+            z-index: 1;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            padding: 2rem 1.5rem 1.5rem;
+            color: var(--white);
+        }
+
+        .gallery-overlay h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .gallery-overlay p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .gallery-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--amber);
+            color: var(--white);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            z-index: 2;
+        }
+
         /* Pricing Section */
         .pricing {
             padding: 6rem 5%;
@@ -860,6 +929,10 @@
                 grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
                 gap: 2rem;
             }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         /* Smooth Scroll */
@@ -888,6 +961,7 @@
             <div class="logo">FamilyTree Photos</div>
             <ul class="nav-links">
                 <li><a href="#features">Возможности</a></li>
+                <li><a href="#gallery">Семейные фото</a></li>
                 <li><a href="#screenshots">Экраны</a></li>
                 <li><a href="#pricing">Тарифы</a></li>
                 <li><a href="#how-it-works">Как это работает</a></li>
@@ -968,7 +1042,7 @@
                 </div>
 
                 <div class="feature-card fade-in">
-                    <div class="feature-icon">👨‍👩‍</div>
+                    <div class="feature-icon">👨‍👩‍👧‍👦</div>
                     <h3>Совместный доступ</h3>
                     <p>Приглашайте родственников для совместного заполнения дерева и добавления мультимедиа. Работайте вместе над семейной историей.</p>
                 </div>
@@ -977,6 +1051,100 @@
                     <div class="feature-icon">🔒</div>
                     <h3>Приватность</h3>
                     <p>Ваши семейные данные под надёжной защитой. Настраивайте уровни доступа и делитесь информацией только с теми, кого выберете.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Happy Family Photos Gallery -->
+    <section class="family-gallery" id="gallery">
+        <div class="container">
+            <h2 class="section-title">Счастливые моменты семьи</h2>
+            <p class="section-subtitle">Сохраняйте улыбки и радость каждого поколения</p>
+            
+            <div class="gallery-grid">
+                <!-- Children Photos -->
+                <div class="gallery-item fade-in">
+                    <div class="gallery-badge">Дети</div>
+                    <div class="gallery-photo">👶</div>
+                    <div class="gallery-overlay">
+                        <h3>Первые шаги</h3>
+                        <p>Радость первых достижений малышей</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item fade-in">
+                    <div class="gallery-badge">Дети</div>
+                    <div class="gallery-photo">👧</div>
+                    <div class="gallery-overlay">
+                        <h3>Детский смех</h3>
+                        <p>Беззаботные моменты детства</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item fade-in">
+                    <div class="gallery-badge">Дети</div>
+                    <div class="gallery-photo">👦</div>
+                    <div class="gallery-overlay">
+                        <h3>Игры и веселье</h3>
+                        <p>Счастливые детские годы</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item fade-in">
+                    <div class="gallery-badge">Дети</div>
+                    <div class="gallery-photo">🎈</div>
+                    <div class="gallery-overlay">
+                        <h3>День рождения</h3>
+                        <p>Праздники и подарки</p>
+                    </div>
+                </div>
+
+                <!-- Parents Photos -->
+                <div class="gallery-item fade-in">
+                    <div class="gallery-badge">Родители</div>
+                    <div class="gallery-photo">👨‍‍👧</div>
+                    <div class="gallery-overlay">
+                        <h3>Семейное счастье</h3>
+                        <p>Родители с детьми</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item fade-in">
+                    <div class="gallery-badge">Родители</div>
+                    <div class="gallery-photo">💑</div>
+                    <div class="gallery-overlay">
+                        <h3>Любовь и забота</h3>
+                        <p>Моменты вместе</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item fade-in">
+                    <div class="gallery-badge">Родители</div>
+                    <div class="gallery-photo">👨‍👩‍👦‍👦</div>
+                    <div class="gallery-overlay">
+                        <h3>Большая семья</h3>
+                        <p>Родители и дети</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item fade-in">
+                    <div class="gallery-badge">Родители</div>
+                    <div class="gallery-photo">🏖️</div>
+                    <div class="gallery-overlay">
+                        <h3>Семейный отдых</h3>
+                        <p>Отпуск и путешествия</p>
+                    </div>
+                </div>
+
+                <!-- Elderly Photos -->
+                <div class="gallery-item fade-in">
+                    <div class="gallery-badge">Старшее поколение</div>
+                    <div class="gallery-photo">👴</div>
+                    <div class="gallery-overlay">
+                        <h3>Мудрость лет</h3>
+                        <p>Дедушки и бабушки</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -998,16 +1166,16 @@
                         </div>
                         <div class="screenshot-content">
                             <div class="photo-grid">
-                                <div class="photo-item">👨‍👩‍</div>
-                                <div class="photo-item">🎂</div>
-                                <div class="photo-item">🏖️</div>
-                                <div class="photo-item">🎄</div>
+                                <div class="photo-item">👶</div>
+                                <div class="photo-item">👧</div>
+                                <div class="photo-item">👦</div>
+                                <div class="photo-item">👨‍👩‍👧</div>
                             </div>
                             <div class="photo-grid">
                                 <div class="photo-item">👴</div>
-                                <div class="photo-item">🎓</div>
-                                <div class="photo-item">💒</div>
-                                <div class="photo-item">👶</div>
+                                <div class="photo-item">👵</div>
+                                <div class="photo-item">👨‍‍👦‍👦</div>
+                                <div class="photo-item">🎂</div>
                             </div>
                         </div>
                     </div>
@@ -1023,9 +1191,9 @@
                         </div>
                         <div class="screenshot-content">
                             <div class="tree-visual">
-                                <div class="tree-node">👴</div>
+                                <div class="tree-node">👴👵</div>
                                 <div class="tree-line"></div>
-                                <div class="tree-node">👨</div>
+                                <div class="tree-node">👨‍👩</div>
                                 <div class="tree-line"></div>
                                 <div class="tree-branch">
                                     <div class="tree-node">👦</div>
@@ -1049,7 +1217,7 @@
                                 <div class="play-button">▶</div>
                             </div>
                             <div style="background: var(--white); padding: 10px; border-radius: 10px; margin-top: 10px;">
-                                <div style="font-size: 0.8rem; font-weight: bold; color: var(--green-dark); margin-bottom: 5px;">День рождения бабушки</div>
+                                <div style="font-size: 0.8rem; font-weight: bold; color: var(--green-dark); margin-bottom: 5px;">День рождения бабушки 👵</div>
                                 <div style="font-size: 0.7rem; color: var(--text-light);">📅 15 марта 2025 • 12:45</div>
                             </div>
                         </div>
@@ -1126,24 +1294,24 @@
                         <div class="screenshot-content">
                             <div style="display: flex; flex-direction: column; gap: 10px;">
                                 <div style="background: var(--white); padding: 15px; border-radius: 12px; display: flex; align-items: center; gap: 12px; box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
-                                    <div style="font-size: 2rem;">📸</div>
+                                    <div style="font-size: 2rem;">👶👦</div>
                                     <div>
-                                        <div style="font-weight: bold; color: var(--green-dark); font-size: 0.9rem;">Фотографии</div>
-                                        <div style="font-size: 0.75rem; color: var(--text-light);">156 фото</div>
+                                        <div style="font-weight: bold; color: var(--green-dark); font-size: 0.9rem;">Дети</div>
+                                        <div style="font-size: 0.75rem; color: var(--text-light);">56 фото</div>
                                     </div>
                                 </div>
                                 <div style="background: var(--white); padding: 15px; border-radius: 12px; display: flex; align-items: center; gap: 12px; box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
-                                    <div style="font-size: 2rem;">🎥</div>
+                                    <div style="font-size: 2rem;">👨‍</div>
                                     <div>
-                                        <div style="font-weight: bold; color: var(--green-dark); font-size: 0.9rem;">Видео</div>
-                                        <div style="font-size: 0.75rem; color: var(--text-light);">23 видео</div>
+                                        <div style="font-weight: bold; color: var(--green-dark); font-size: 0.9rem;">Родители</div>
+                                        <div style="font-size: 0.75rem; color: var(--text-light);">42 фото</div>
                                     </div>
                                 </div>
                                 <div style="background: var(--white); padding: 15px; border-radius: 12px; display: flex; align-items: center; gap: 12px; box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
-                                    <div style="font-size: 2rem;">🎙️</div>
+                                    <div style="font-size: 2rem;">👴</div>
                                     <div>
-                                        <div style="font-weight: bold; color: var(--green-dark); font-size: 0.9rem;">Аудио</div>
-                                        <div style="font-size: 0.75rem; color: var(--text-light);">18 записей</div>
+                                        <div style="font-weight: bold; color: var(--green-dark); font-size: 0.9rem;">Старшие</div>
+                                        <div style="font-size: 0.75rem; color: var(--text-light);">38 фото</div>
                                     </div>
                                 </div>
                                 <div style="background: var(--white); padding: 15px; border-radius: 12px; display: flex; align-items: center; gap: 12px; box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
